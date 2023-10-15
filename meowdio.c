@@ -8,6 +8,8 @@ int main(int argc, char** argv) {
     ma_engine engine;
 	ma_sound sound;
 
+	char buffer[10];
+	
 	if (argc < 2) {
 		printf("no file path <3\n");
 		return 69;
@@ -27,7 +29,6 @@ int main(int argc, char** argv) {
 	}
 
 	while (1) {
-		char buffer[10];
 		read(STDIN_FILENO, buffer, 10);
 
 		if (buffer[0] == 'c') {
