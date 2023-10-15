@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "miniaudio.h"
+#include <sys/select.h>
+#include <unistd.h>
 
 int main(int argc, char** argv) {
 	ma_result result;
@@ -23,6 +25,29 @@ int main(int argc, char** argv) {
 	if (argc > 2) {
 		ma_sound_set_looping(&sound, 1);
 	}
+
+	while (1) {
+		fd_set s_rd, s_wr, s_ex;
+    	FD_ZERO(&s_rd);
+    	FD_ZERO(&s_wr);
+    	FD_ZERO(&s_ex);
+    	FD_SET(fileno(stdin), &s_rd);
+    	select(fileno(stdin)+1, &s_rd, &s_wr, &s_ex, NULL);
+	
+		char buffer[10];
+		read(STDIN_FILENO, buffer, 10);
+
+		if (buffer[0] == 'c') {
+			if (ma_sound_is_playing(&sound) == 1){
+				ma_sound_stop(&sound);
+			}
+			else {
+				ma_sound_start(&sound);
+			}	
+			
+		}
+	}
+
 
     printf("Press enter to quit...");
     getchar();
