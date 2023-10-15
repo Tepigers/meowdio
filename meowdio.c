@@ -27,13 +27,6 @@ int main(int argc, char** argv) {
 	}
 
 	while (1) {
-		fd_set s_rd, s_wr, s_ex;
-    	FD_ZERO(&s_rd);
-    	FD_ZERO(&s_wr);
-    	FD_ZERO(&s_ex);
-    	FD_SET(fileno(stdin), &s_rd);
-    	select(fileno(stdin)+1, &s_rd, &s_wr, &s_ex, NULL);
-	
 		char buffer[10];
 		read(STDIN_FILENO, buffer, 10);
 
@@ -47,10 +40,6 @@ int main(int argc, char** argv) {
 			
 		}
 	}
-
-
-    printf("Press enter to quit...");
-    getchar();
 
     ma_engine_uninit(&engine);
 	return 0;
