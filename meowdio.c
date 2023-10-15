@@ -6,7 +6,7 @@ int main(int argc, char** argv) {
     ma_engine engine;
 	ma_sound sound;
 
-	if (argc < 2){
+	if (argc < 2) {
 		printf("no file path <3\n");
 		return 69;
 	}
@@ -19,7 +19,10 @@ int main(int argc, char** argv) {
 	
 	ma_sound_init_from_file(&engine, argv[1], 0, NULL, NULL, &sound);
 	ma_sound_start(&sound);
-	ma_sound_set_looping(&sound, 1);
+
+	if (argc > 2) {
+		ma_sound_set_looping(&sound, 1);
+	}
 
     printf("Press enter to quit...");
     getchar();
