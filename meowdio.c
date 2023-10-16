@@ -7,7 +7,7 @@ int main(int argc, char** argv) {
     ma_engine engine;
 	ma_sound sound;
 
-	char buffer[10];
+	char buffer[3];
 	
 	if (argc < 2) {
 		printf("no file path <3\n");
@@ -23,12 +23,8 @@ int main(int argc, char** argv) {
 	ma_sound_init_from_file(&engine, argv[1], 0, NULL, NULL, &sound);
 	ma_sound_start(&sound);
 
-	if (argc > 2) {
-		ma_sound_set_looping(&sound, 1);
-	}
-
 	while (1) {
-		read(STDIN_FILENO, buffer, 10);
+		scanf("%s", &buffer);
 
 		if (buffer[0] == 'c') {
 			if (ma_sound_is_playing(&sound) == 1){
@@ -39,6 +35,16 @@ int main(int argc, char** argv) {
 			}	
 			
 		}
+		else if (buffer[0] == 'r') {
+			if (ma_sound_is_looping(&sound) == 1) {
+				ma_sound_set_looping(&sound, 0);
+				printf("looping disabled ^_^\n");
+			}
+			else {
+				ma_sound_set_looping(&sound, 1);
+				printf("looping enabled <3\n");
+			}
+		} 
 	}
 
     ma_engine_uninit(&engine);
