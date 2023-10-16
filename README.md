@@ -11,7 +11,7 @@ cc -O3 -c libs.c -o libs.o
 ```
 compile my amazing code
 ```
-cc -O3 asciivideo.c -o asciivideo -lm libs.o
+cc -O3 meowdio.c -o meowdio -lm libs.o
 ```
 # How to on Michaelsoft Binbows?
 ¯\\\_(ツ)_/¯
