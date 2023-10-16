@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "miniaudio.h"
-#include <unistd.h>
 
 int main(int argc, char** argv) {
 	ma_result result;
