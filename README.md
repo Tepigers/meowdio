@@ -14,6 +14,6 @@ compile my amazing code
 cc -O3 asciivideo.c -o asciivideo -lm libs.o
 ```
 # How to on Michaelsoft Binbows?
-¯\_(ツ)_/¯
+¯\\_(ツ)_/¯
 # Extra Stuffs
 the government has asked me to pretty please link to [the funny audio library i used](https://github.com/mackron/miniaudio) which is 1984 smh
