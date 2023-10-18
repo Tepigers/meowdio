@@ -8,7 +8,7 @@
 void keybindsONG(ma_sound* sound) {
 	char buffer[3];
 
-	while (ma_sound_is_playing(sound)) {
+	while (!ma_sound_at_end(sound)) {
 		scanf("%s", &buffer);
 
 		if (buffer[0] == 'c') {
@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
 
 	struct dirent *de;
 
-	DIR *dr = opendir(argv[1]);
+	char *idx;
 
 	if (argc < 2) {
 		fprintf(stderr, "no file path <3\n");
@@ -53,9 +53,18 @@ int main(int argc, char** argv) {
 		return 69;
 	}
 
+	DIR *dr = opendir(argv[1]);
+
 	int len = strlen(argv[1]);
 
-	if (strcmp(argv[1], ".mp3") == 1) {
+	if ((idx = strchr(argv[1], '.')) != NULL) {
+		if (!(strcmp(idx, ".mp3") == 1)) {
+			ma_sound_init_from_file(&engine, argv[1], 0, NULL, NULL, &sound);
+			ma_sound_start(&sound);
+			keybindsONG(&sound);
+		}
+	}
+	else {
 		if (dr == NULL) {
 			fprintf(stderr, "i can't open that, silly <3\n");
 			return 69;
@@ -63,14 +72,11 @@ int main(int argc, char** argv) {
 		int i = -1;
 		while ((de = readdir(dr)) != NULL) {
 			i++;
-			char *idx;
-			//if ((idx = strchr(de->d_name, '.')) == NULL) break;
-			//if (!(strcmp(idx, ".mp3") == 0)) break;
 
 			char fullpath[256];
-            strcpy(fullpath, argv[1]);
-            strcat(fullpath, "/");
-            strcat(fullpath, de->d_name);
+        	strcpy(fullpath, argv[1]);
+        	strcat(fullpath, "/");
+        	strcat(fullpath, de->d_name);
 
 			ma_sound_init_from_file(&engine, fullpath, 0, NULL, NULL, &sound);
 			ma_sound_start(&sound);
@@ -78,6 +84,7 @@ int main(int argc, char** argv) {
 			ma_sound_uninit(&sound);
 		}
 	}
+
 
 	ma_engine_uninit(&engine);
 	return 0;
