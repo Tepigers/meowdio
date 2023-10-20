@@ -55,8 +55,6 @@ int main(int argc, char** argv) {
 
 	DIR *dr = opendir(argv[1]);
 
-	int len = strlen(argv[1]);
-
 	if ((idx = strchr(argv[1], '.')) != NULL) {
 		if (!(strcmp(idx, ".mp3") == 1)) {
 			ma_sound_init_from_file(&engine, argv[1], 0, NULL, NULL, &sound);
