@@ -6,12 +6,12 @@
 #include "miniaudio.h"
 
 void keybindsONG(ma_sound* sound) {
-	char buffer[3];
+	char buffer;
 
 	while (!ma_sound_at_end(sound)) {
-		scanf("%s", &buffer);
+		buffer = fgetc(stdin);
 
-		if (buffer[0] == 'c') {
+		if (buffer == 'c') {
 			if (ma_sound_is_playing(sound) == 1){
 				ma_sound_stop(sound);
 			}
@@ -20,7 +20,7 @@ void keybindsONG(ma_sound* sound) {
 			}
 
 		}
-		else if (buffer[0] == 'r') {
+		else if (buffer == 'r') {
 			if (ma_sound_is_looping(sound) == 1) {
 				ma_sound_set_looping(sound, 0);
 				printf("looping disabled ^_^\n");
