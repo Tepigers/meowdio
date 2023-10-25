@@ -1,7 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <dirent.h>
-#include <unistd.h>
 #include <string.h>
 #include "miniaudio.h"
 
@@ -82,7 +80,6 @@ int main(int argc, char** argv) {
 			ma_sound_uninit(&sound);
 		}
 	}
-
 
 	ma_engine_uninit(&engine);
 	return 0;

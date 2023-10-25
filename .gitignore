@@ -53,3 +53,4 @@ dkms.conf
 .vscode/
 meowdio
 miniaudio.h
+.meowdio.c.swp
